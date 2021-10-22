@@ -1,5 +1,8 @@
 package me.xiacongling.code.util
 
+/**
+ * Prefix Dictionary (Trie) Data Structure.
+ */
 class Trie(private val parent: Trie? = null, char: Char? = null) {
     private var fin: Boolean = false
     private val children: MutableMap<Char, Trie> = mutableMapOf()
