@@ -225,8 +225,8 @@ fun networkBecomesIdle(edges: Array<IntArray>, patience: IntArray): Int {
         m.getOrPut(edge[0]) { mutableListOf() }.add(edge[1])
         m.getOrPut(edge[1]) { mutableListOf() }.add(edge[0])
     }
-    val len: IntArray = IntArray(n + 1) { 0 }
-    val vis: IntArray = IntArray(n + 1) { 0 }
+    val len = IntArray(n + 1) { 0 }
+    val vis = IntArray(n + 1) { 0 }
     var layer: MutableList<Int> = mutableListOf(0)
 
     var l = 1
@@ -247,7 +247,7 @@ fun networkBecomesIdle(edges: Array<IntArray>, patience: IntArray): Int {
         layer = nextLayer
     }
 
-    val empty: IntArray = IntArray(n) { 0 }
+    val empty = IntArray(n) { 0 }
     for (i in 1 until n) {
         val ttl = 2 * len[i]
         val p = patience[i]
