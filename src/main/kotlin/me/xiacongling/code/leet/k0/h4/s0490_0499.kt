@@ -2,6 +2,7 @@ package me.xiacongling.code.leet.k0.h4
 
 import me.xiacongling.code.leet.Difficulty
 import me.xiacongling.code.leet.Solution
+import me.xiacongling.code.util.MonoStack
 
 @Solution(
     id = 492, title = "构造矩形", difficulty = Difficulty.EASY, description = """
@@ -77,14 +78,10 @@ nums1 中数字 x 的下一个更大元素是指 x 在 nums2 中对应位置的�
 """
 )
 fun nextGreaterElement(nums1: IntArray, nums2: IntArray): IntArray {
-    val stack: MutableList<Int> = mutableListOf()
+    val stack = MonoStack(asc = false)
     val next: MutableMap<Int, Int> = mutableMapOf()
     for (num in nums2.reversed()) {
-        while (stack.isNotEmpty() && num > stack.last()) {
-            stack.removeLast()
-        }
-        next[num] = stack.lastOrNull() ?: -1
-        stack.add(num)
+        next[num] = stack.push(num) ?: -1
     }
     return nums1.map { next[it] ?: -1 }.toIntArray()
 }
