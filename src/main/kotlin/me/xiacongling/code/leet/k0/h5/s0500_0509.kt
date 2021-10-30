@@ -37,5 +37,6 @@ val KB_LINES: List<Set<Char>> = listOf("qwertyuiop".toSet(), "asdfghjkl".toSet()
 """
 )
 fun findWords(words: Array<String>): Array<String> {
-    return words.filter { word -> KB_LINES.any { it.containsAll(word.toList()) } }.toTypedArray()
+    return words.map { it.lowercase() }
+        .filter { word -> KB_LINES.any { it.containsAll(word.lowercase().toList()) } }.toTypedArray()
 }
