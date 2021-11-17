@@ -4,6 +4,21 @@ enum class Difficulty {
     EASY, MEDIUM, HARD
 }
 
+enum class FailReason(desc: String) {
+    TLE("Time Limit Exceeds"),
+    WA("Wrong Answer")
+}
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.SOURCE)
+annotation class Frustrating(
+    val reason: FailReason,
+)
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.SOURCE)
+annotation class Trick
+
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Solution(

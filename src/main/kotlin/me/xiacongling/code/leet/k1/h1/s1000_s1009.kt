@@ -1,4 +1,4 @@
-package me.xiacongling.code.leet.k1.h4.h1
+package me.xiacongling.code.leet.k1.h1
 
 import me.xiacongling.code.leet.Difficulty
 import me.xiacongling.code.leet.Solution

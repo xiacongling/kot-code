@@ -41,6 +41,57 @@ fun constructRectangle(area: Int): IntArray {
 }
 
 @Solution(
+    id = 495, title = "提莫攻击", difficulty = Difficulty.EASY, description = """
+在《英雄联盟》的世界中，有一个叫 “提莫” 的英雄。他的攻击可以让敌方英雄艾希（编者注：寒冰射手）进入中毒状态。
+
+当提莫攻击艾希，艾希的中毒状态正好持续 duration 秒。
+
+正式地讲，提莫在 t 发起发起攻击意味着艾希在时间区间 [t, t + duration - 1]（含 t 和 t + duration - 1）
+处于中毒状态。如果提莫在中毒影响结束 前 再次攻击，中毒状态计时器将会 重置 ，在新的攻击之后，中毒影响将会在 
+duration 秒后结束。
+
+给你一个非递减的整数数组 timeSeries，其中 timeSeries[i] 表示提莫在 timeSeries[i] 秒时对艾希发起攻击，
+以及一个表示中毒持续时间的整数 duration 。
+
+返回艾希处于中毒状态的总秒数。
+
+示例 1：
+输入：timeSeries = [1,4], duration = 2
+输出：4
+解释：提莫攻击对艾希的影响如下：
+- 第 1 秒，提莫攻击艾希并使其立即中毒。中毒状态会维持 2 秒，即第 1 秒和第 2 秒。
+- 第 4 秒，提莫再次攻击艾希，艾希中毒状态又持续 2 秒，即第 4 秒和第 5 秒。
+艾希在第 1、2、4、5 秒处于中毒状态，所以总中毒秒数是 4 。
+
+示例 2：
+输入：timeSeries = [1,2], duration = 2
+输出：3
+解释：提莫攻击对艾希的影响如下：
+- 第 1 秒，提莫攻击艾希并使其立即中毒。中毒状态会维持 2 秒，即第 1 秒和第 2 秒。
+- 第 2 秒，提莫再次攻击艾希，并重置中毒计时器，艾希中毒状态需要持续 2 秒，即第 2 秒和第 3 秒。
+艾希在第 1、2、3 秒处于中毒状态，所以总中毒秒数是 3 。
+
+提示：
+* 1 <= timeSeries.length <= 10^4
+* 0 <= timeSeries[i], duration <= 10^7
+* timeSeries 按 非递减 顺序排列
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/teemo-attacking
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+"""
+)
+fun findPoisonedDuration(timeSeries: IntArray, duration: Int): Int {
+    var result = 0
+    for (i in 1 until timeSeries.size) {
+        val t = timeSeries[i]
+        val gap = t - timeSeries[i - 1]
+        result += if (gap < duration) gap else duration
+    }
+    return result + duration
+}
+
+@Solution(
     id = 496, title = "下一个更大元素 I", difficulty = Difficulty.EASY, description = """
 给你两个没有重复元素的数组 nums1 和 nums2 ，其中 nums1 是 nums2 的子集。
 
@@ -90,4 +141,8 @@ fun nextGreaterElement(nums1: IntArray, nums2: IntArray): IntArray {
 fun main() {
     println(nextGreaterElement(intArrayOf(4, 1, 2), intArrayOf(1, 3, 4, 2)).toList())
     println(nextGreaterElement(intArrayOf(2, 4), intArrayOf(1, 2, 3, 4)).toList())
+
+    // 495
+    println(findPoisonedDuration(intArrayOf(1, 4), 2))
+    println(findPoisonedDuration(intArrayOf(1, 2), 2))
 }
