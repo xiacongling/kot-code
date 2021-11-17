@@ -4,6 +4,44 @@ import me.xiacongling.code.leet.Difficulty
 import me.xiacongling.code.leet.Solution
 
 @Solution(
+    id = 520, title = "检测大写字母", difficulty = Difficulty.EASY, description = """
+我们定义，在以下情况时，单词的大写用法是正确的：
+* 全部字母都是大写，比如 "USA" 。
+* 单词中所有字母都不是大写，比如 "leetcode" 。
+* 如果单词不只含有一个字母，只有首字母大写， 比如 "Google" 。
+* 给你一个字符串 word 。如果大写用法正确，返回 true；否则，返回 false 。
+
+示例 1：
+输入：word = "USA"
+输出：true
+
+示例 2：
+输入：word = "FlaG"
+输出：false
+
+提示：
+* 1 <= word.length <= 100
+* word 由小写和大写英文字母组成
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/detect-capital
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+"""
+)
+fun detectCapitalUse(word: String): Boolean {
+    if (word.length < 2) return true
+    val firstCap = word[0].isUpperCase()
+    val secondCap = word[1].isUpperCase()
+    if (!firstCap && secondCap) return false
+    val expect = firstCap && secondCap
+    for (i in 2 until word.length) {
+        val actual = word[i].isUpperCase()
+        if (expect != actual) return false
+    }
+    return true
+}
+
+@Solution(
     id = 524, title = "通过删除字母匹配到字典里最长单词", difficulty = Difficulty.MEDIUM, description = """
 给你一个字符串 s 和一个字符串数组 dictionary 作为字典，找出并返回字典中最长的字符串，该字符串可以通过删除 s 中的某些字符得到。
 
