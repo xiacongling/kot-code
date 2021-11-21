@@ -36,6 +36,10 @@ class Node(var `val`: Int) {
     override fun toString(): String = `val`.toString()
 }
 
+class NTreeNode(var `val`: Int) {
+    var children: List<NTreeNode?> = listOf()
+}
+
 class ListNode(var `val`: Int) {
     var next: ListNode? = null
 
