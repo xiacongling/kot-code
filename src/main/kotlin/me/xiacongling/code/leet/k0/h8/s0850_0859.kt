@@ -71,6 +71,7 @@ fun peakIndexInMountainArray(arr: IntArray): Int {
 """
 )
 fun buddyStrings(s: String, goal: String): Boolean {
+    if (s.length != goal.length) return false
     val n = s.length
     var diff1 = -1
     var diff2 = -1
@@ -94,6 +95,7 @@ fun buddyStrings(s: String, goal: String): Boolean {
 }
 
 fun main() {
+    println(buddyStrings("ab", "babbb"))
     println(buddyStrings("ab", "ba"))
     println(buddyStrings("ab", "ab"))
     println(buddyStrings("aa", "aa"))
