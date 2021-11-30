@@ -2,9 +2,43 @@ package me.xiacongling.code.leet.k0.h4
 
 import me.xiacongling.code.leet.Difficulty
 import me.xiacongling.code.leet.Solution
+import kotlin.math.pow
 
 private const val HEX_MASK: Int = 15
 private const val HEX_CHARS: String = "0123456789abcdef"
+
+@Solution(
+    id = 400, title = "第 N 位数字", difficulty = Difficulty.MEDIUM, description = """
+给你一个整数 n ，请你在无限的整数序列[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...] 中找出并返回第 n 位数字。
+
+示例 1：
+输入：n = 3
+输出：3
+
+示例 2：
+输入：n = 11
+输出：0
+解释：第 11 位数字在序列 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... 里是 0 ，它是 10 的一部分。
+
+提示：
+* 1 <= n <= 2^31 - 1
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/nth-digit
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+"""
+)
+fun findNthDigit(n: Int): Int {
+    var t = n
+    var d = 1
+    var count = 9
+    while (t > 1L * d * count) {
+        t -= d * count
+        d += 1
+        count *= 10
+    }
+    return ((10.0.pow(d - 1).toInt() + (t - 1) / d) / (10.0.pow(d - (t - 1) % d - 1)).toInt()) % 10
+}
 
 @Solution(
     id = 405, title = "数字转换为十六进制", difficulty = Difficulty.EASY, description = """
@@ -118,6 +152,10 @@ fun trapRainWater(heightMap: Array<IntArray>): Int {
 }
 
 fun main() {
+    // 400
+    println(findNthDigit(3))
+    println(findNthDigit(11))
+
     println(toHex(16))
     println(toHex(26))
     println(toHex(0))
